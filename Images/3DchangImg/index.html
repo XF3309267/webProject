@@ -1,271 +1,411 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<title>3D图片轮播图切换</title>
-	<style type="text/css">
-	*{
-		margin: 0;
-		padding: 0;
-	}
-	.box{
-		margin-top: 100px;
-		width: 100%;
-		height: 340px;
-		position: relative;
-	}
-
-	.list{
-		width: 1200px;
-		height: 300px;
-		overflow: hidden;
-		position: absolute;
-		left: 50%;
-		margin-left: -600px;
-	}
-
-	.btn{
-		position: absolute;
-		top: 50%;
-		margin-top: -50px;
-		width: 60px;
-		height: 100px;
-		line-height: 100px;
-		font-size: 30px;
-		color: white;
-		text-decoration: none;
-		text-align: center;
-		background: rgba(0,255,0,.5);
-		cursor: pointer;
-	}
-	.next{
-		right: 0;
-	}
-
-	li{
-		position: absolute;
-		top: 0;
-		left: 0;
-		list-style: none;
-		opacity: 0;
-		transition: all 0.3s ease-out;
-	}
-	img{
-		width: 751px;
-		height: 300px;
-		border:none;
-		float: left;
-	}
-	.p1{
-		transform:translate3d(-224px,0,0) scale(0.81);
-	}
-	.p2{
-		transform:translate3d(0px,0,0) scale(0.81);
-		transform-origin:0 50%;
-		opacity: 0.8;
-		z-index: 2;
-	}
-	.p3{
-		transform:translate3d(224px,0,0) scale(1);
-		z-index: 3;
-		opacity: 1;
-	}
-	.p4{
-		transform:translate3d(449px,0,0) scale(0.81);
-		transform-origin:100% 50%;
-		opacity: 0.8;
-		z-index: 2;
-	}
-	.p5{
-		transform:translate3d(672px,0,0) scale(0.81);
-	}
-	.p6{
-		transform:translate3d(896px,0,0) scale(0.81);
-	}
-	.p7{
-		transform:translate3d(1120px,0,0) scale(0.81);
-	}
-
-	.buttons{
-		position: absolute;
-		width: 1200px;
-		height: 30px;
-		bottom: 0;
-		left: 50%;
-		margin-left: -600px;
-		text-align: center;
-		padding-top: 10px;
-	}
-	.buttons a{
-		display: inline-block;
-		width: 35px;
-		height: 5px;
-		padding-top: 4px;
-		cursor: pointer;
-	}
-	span{
-		display: block;
-		width: 35px;
-		height: 1px;
-		background: red;
-	}
-	.blue{
-		background: blue;
-	}
-	</style>
+    <meta charset="UTF-8">
+    <title>3D图片轮播图切换</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            margin-top: 100px;
+            width: 100%;
+            height: 340px;
+            position: relative;
+        }
+        
+        .list {
+            /* list 用以存放 照片 */
+            width: 1200px;
+            height: 300px;
+            overflow: hidden;
+            position: absolute;
+            /* 以下两句： 将 list内容   居中*/
+            left: 50%;
+            margin-left: -600px;
+            /* 这里的 -600px  即是自身宽度的一半*/
+        }
+        
+        .btn {
+            /*  btn  照片左右两边的   按钮 */
+            position: absolute;
+            /* 以下两句和上述相同 */
+            top: 50%;
+            margin-top: -50px;
+            width: 60px;
+            height: 100px;
+            line-height: 100px;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            background: rgba(0, 255, 0, .5);
+            cursor: pointer;
+        }
+        
+        .next {
+            right: 0;
+        }
+        
+        li {
+            /* 每张照片的容器 */
+            position: absolute;
+            top: 0;
+            left: 0;
+            list-style: none;
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+        
+        img {
+            /* 每张照片的属性 */
+            width: 751px;
+            height: 300px;
+            border: none;
+            float: left;
+        }
+        
+        .p1 {
+            /* translate3d(-224px, 0, 0)  相对父元素 X轴 -224px; scale(0.81) 整个元素大小  * 0.81 */
+            /*  可能已被 左边的图所掩盖 */
+            transform: translate3d(-224px, 0, 0) scale(0.81);
+        }
+        
+        .p2 {
+            /* 中间那张图的左边一张图 */
+            transform: translate3d(0px, 0, 0) scale(0.81);
+            transform-origin: 0 50%;
+            opacity: 0.8;
+            z-index: 2;
+        }
+        /* 
+            * z-index 属性设置元素的堆叠顺序。
+                拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面。
+            * 注释：元素可拥有负的 z-index 属性值。
+            * 注释：Z-index 仅能在定位元素上奏效（例如 position:absolute;）
+            * 属性设置一个定位元素沿 z 轴的位置，z 轴定义为垂直延伸到显示区的轴。
+                如果为正数，则离用户更近，为负数则表示离用户更远。
+         */
+        
+        .p3 {
+            /*  最中间的那张 图片 */
+            transform: translate3d(224px, 0, 0) scale(1);
+            z-index: 3;
+            /*  opacity  0   完全透明
+                opacity  1   完全不透明
+             */
+            opacity: 1;
+        }
+        
+        .p4 {
+            /* 中间那张图的右边一张图 */
+            transform: translate3d(449px, 0, 0) scale(0.81);
+            /* transform: x y;   x 移动 x 轴, y 移动 y轴 */
+            transform-origin: 100% 50%;
+            opacity: 0.8;
+            z-index: 2;
+        }
+        
+        .p5 {
+            transform: translate3d(672px, 0, 0) scale(0.81);
+        }
+        
+        .p6 {
+            transform: translate3d(896px, 0, 0) scale(0.81);
+        }
+        
+        .p7 {
+            transform: translate3d(1120px, 0, 0) scale(0.81);
+        }
+        
+        .buttons {
+            position: absolute;
+            width: 1200px;
+            height: 30px;
+            bottom: 0;
+            left: 50%;
+            margin-left: -600px;
+            text-align: center;
+            padding-top: 10px;
+        }
+        
+        .buttons a {
+            display: inline-block;
+            width: 35px;
+            height: 5px;
+            padding-top: 4px;
+            cursor: pointer;
+        }
+        
+        span {
+            display: block;
+            width: 35px;
+            height: 1px;
+            background: red;
+        }
+        
+        .blue {
+            background: blue;
+        }
+    </style>
 
 </head>
+
 <body>
 
-<div class="box">
+    <div class="box">
 
-	<div class="list">
-		<ul>
-			<li class="p7"><a href="#"><img src="img/1.png" alt="" /></a></li>
-			<li class="p6"><a href="#"><img src="img/2.png" alt="" /></a></li>
-			<li class="p5"><a href="#"><img src="img/3.png" alt="" /></a></li>
-			<li class="p4"><a href="#"><img src="img/44.jpg" alt="" /></a></li>
-			<li class="p3"><a href="#"><img src="img/55.jpg" alt="" /></a></li>
-			<li class="p2"><a href="#"><img src="img/66.jpg" alt="" /></a></li>
-			<li class="p1"><a href="#"><img src="img/77.jpg" alt="" /></a></li>
-		</ul>
-	</div>
-	
-	<a href="javascript:;" class="prev btn"><</a>
-	<a href="javascript:;" class="next btn">></a>
+        <div class="list">
+            <ul>
+                <li class="p7">
+                    <a href="#"><img src="img/1.png" alt="" /></a>
+                </li>
+                <li class="p6">
+                    <a href="#"><img src="img/2.png" alt="" /></a>
+                </li>
+                <li class="p5">
+                    <a href="#"><img src="img/3.png" alt="" /></a>
+                </li>
+                <li class="p4">
+                    <a href="#"><img src="img/44.jpg" alt="" /></a>
+                </li>
+                <li class="p3">
+                    <a href="#"><img src="img/55.jpg" alt="" /></a>
+                </li>
+                <li class="p2">
+                    <a href="#"><img src="img/66.jpg" alt="" /></a>
+                </li>
+                <li class="p1">
+                    <a href="#">
+                        <img src="img/77.jpg" alt="" /></a>
+                </li>
+            </ul>
+        </div>
 
-	<div class="buttons">
-		<a href="javascript:;"><span class="blue"></span></a>
-		<a href="javascript:;"><span></span></a>
-		<a href="javascript:;"><span></span></a>
-		<a href="javascript:;"><span></span></a>
-		<a href="javascript:;"><span></span></a>
-		<a href="javascript:;"><span></span></a>
-		<a href="javascript:;"><span></span></a>
-	</div>
-</div>
+        <a href="javascript:;" class="prev btn">
+            <</a>
+                <a href="javascript:;" class="next btn">></a>
 
-	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript">
-	var $a=$(".buttons a");
-	var $s=$(".buttons span");
-	var cArr=["p7","p6","p5","p4","p3","p2","p1"];
-	var index=0;
-	$(".next").click(
-		function(){
-		nextimg();
-		}
-	)
-	$(".prev").click(
-		function(){
-		previmg();
-		}
-	)
-	//上一张
-	function previmg(){
-		cArr.unshift(cArr[6]);
-		cArr.pop();
-		//i是元素的索引，从0开始
-		//e为当前处理的元素
-		//each循环，当前处理的元素移除所有的class，然后添加数组索引i的class
-		$("li").each(function(i,e){
-			$(e).removeClass().addClass(cArr[i]);
-		})
-		index--;
-		if (index<0) {
-			index=6;
-		}
-		show();
-	}
+                <div class="buttons">
+                    <a href="javascript:;"><span class="blue"></span></a>
+                    <a href="javascript:;"><span></span></a>
+                    <a href="javascript:;"><span></span></a>
+                    <a href="javascript:;"><span></span></a>
+                    <a href="javascript:;"><span></span></a>
+                    <a href="javascript:;"><span></span></a>
+                    <a href="javascript:;"><span></span></a>
+                </div>
+    </div>
 
-	//下一张
-	function nextimg(){
-		cArr.push(cArr[0]);
-		cArr.shift();
-		$("li").each(function(i,e){
-			$(e).removeClass().addClass(cArr[i]);
-		})
-		index++;
-		if (index>6) {
-			index=0;
-		}
-		show();
-	}
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        //  $a ： 图片下面的按钮链接
+        //  $s :  图片下面的按钮实体
+        var $a = $(".buttons a");
+        var $s = $(".buttons span");
+        //  cArr 存放图片的各个样式
+        var cArr = ["p7", "p6", "p5", "p4", "p3", "p2", "p1"];
+        var index = 0;
+        $(".next").click(
+            function() {
+                nextimg();
+            }
+        )
+        $(".prev").click(
+                function() {
+                    previmg();
+                }
+            )
+            //上一张
+        function previmg() {
+            // unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
+            //  如果 不止一个参数 ，则该方法的第一个参数将成为数组的新元素 0，
+            // 	第二个参数，它将成为新的元素 1，以此类推。
+            cArr.unshift(cArr[6]);
 
-	//通过底下按钮点击切换
-	$a.each(function(){
-		$(this).click(function(){
-			var myindex=$(this).index();
-			var b=myindex-index;
-			if(b==0){
-				return;
-			}
-			else if(b>0) {
-				/*
-				 * splice(0,b)的意思是从索引0开始,取出数量为b的数组
-				 * 因为每次点击之后数组都被改变了,所以当前显示的这个照片的索引才是0
-				 * 所以取出从索引0到b的数组,就是从原本的这个照片到需要点击的照片的数组
-				 * 这时候原本的数组也将这部分数组进行移除了
-				 * 再把移除的数组添加的原本的数组的后面
-				 */
-				var newarr=cArr.splice(0,b);
-				cArr=$.merge(cArr,newarr);
-				$("li").each(function(i,e){
-				$(e).removeClass().addClass(cArr[i]);
-				})
-				index=myindex;
-				show();
-			}
-			else if(b<0){
-				/*
-				 * 因为b<0,所以取数组的时候是倒序来取的,也就是说我们可以先把数组的顺序颠倒一下
-				 * 而b现在是负值,所以取出索引0到-b即为需要取出的数组
-				 * 也就是从原本的照片到需要点击的照片的数组
-				 * 然后将原本的数组跟取出的数组进行拼接
-				 * 再次倒序,使原本的倒序变为正序
-				 */
-				cArr.reverse();
-				var oldarr=cArr.splice(0,-b)
-				cArr=$.merge(cArr,oldarr);
-				cArr.reverse();
-				$("li").each(function(i,e){
-				$(e).removeClass().addClass(cArr[i]);
-				})
-				index=myindex;
-				show();
-			}
-		})
-	})
+            // pop() 方法将删除 arrayObject 的最后一个元素，把数组长度减 1，并且返回它删除的元素的值。
+            // 如果数组已经为空，则 pop() 不改变数组，并返回 undefined 值。
+            cArr.pop();
 
-	//改变底下按钮的背景色
-	function show(){
-			$($s).eq(index).addClass("blue").parent().siblings().children().removeClass("blue");
-	}
+            // 以上两句，即将 样式数组 中的最后一位 样式 移入数组首位
 
-	//点击class为p2的元素触发上一张照片的函数
-	$(document).on("click",".p2",function(){
-		previmg();
-		return false;//返回一个false值，让a标签不跳转
-	});
+            //i是元素的索引，从0开始
+            //e为当前处理的元素
+            //each循环，当前处理的元素移除所有的class，然后添加数组索引i的class
+            $("li").each(function(i, e) {
+                $(e).removeClass().addClass(cArr[i]);
+            })
+            index--;
+            if (index < 0) {
+                index = 6;
+            }
+            show();
+        }
 
-	//点击class为p4的元素触发下一张照片的函数
-	$(document).on("click",".p4",function(){
-		nextimg();
-		return false;
-	});
+        //下一张
+        function nextimg() {
+            cArr.push(cArr[0]);
+            cArr.shift();
+            // // 以上两句，即将 样式数组 中的首位 样式 移到数组末尾位
+            $("li").each(function(i, e) {
+                $(e).removeClass().addClass(cArr[i]);
+            })
+            index++;
+            if (index > 6) {
+                index = 0;
+            }
+            show();
+        }
 
-	//			鼠标移入box时清除定时器
-	$(".box").mouseover(function(){
-		clearInterval(timer);
-	})
+        //通过底下按钮点击切换
+        $a.each(function() {
+            $(this).click(function() {
+                var myindex = $(this).index();
+                var b = myindex - index;
+                if (b == 0) {
+                    return;
+                } else if (b > 0) {
+                    /*
+                        b > 0 ,即点击的按钮下标，大于正在显示的图片的下标
+                        b ， 即是 点击 “下一张” 点击的次数 
+                        将 cArr 数组中 前 （0，b） 的元素插入数组末尾
+                        和 上述的 点击下一张（将首位插入到末尾位）执行两次是一样的
 
-	//			鼠标移出box时开始定时器
-	$(".box").mouseleave(function(){
-		timer=setInterval(nextimg,4000);
-	})
+                    */
+                    /*
+                     * splice(0,b)的意思是从索引0开始,取出数量为b的数组
+                     * 因为每次点击之后数组都被改变了,所以当前显示的这个照片的索引才是0
+                     * 所以取出从索引0到b的数组,就是从原本的这个照片到需要点击的照片的数组
+                     * 这时候原本的数组也将这部分数组进行移除了
+                     * 再把移除的数组添加到原本的数组的后面
+                     */
+                    var newarr = cArr.splice(0, b);
 
-	//			进入页面自动开始定时器
-	timer=setInterval(nextimg,4000);
-	</script>
+
+                    cArr = $.merge(cArr, newarr);
+                    $("li").each(function(i, e) {
+                        $(e).removeClass().addClass(cArr[i]);
+                    })
+                    index = myindex;
+                    show();
+                } else if (b < 0) {
+                    //  b 小于 0 ，则取 末尾的几位
+                    /*
+                     * 因为b<0,所以取数组的时候是倒序来取的,也就是说我们可以先把数组的顺序颠倒一下
+                     * 而b现在是负值,所以取出索引0到-b即为需要取出的数组
+                     * 也就是从原本的照片到需要点击的照片的数组
+                     * 然后将原本的数组跟取出的数组进行拼接
+                     * 再次倒序,使原本的倒序变为正序
+                     */
+                    console.log("1 before reverse cArr = " + cArr);
+                    cArr.reverse();
+                    var oldarr = cArr.splice(0, -b)
+                    cArr = $.merge(cArr, oldarr);
+                    cArr.reverse();
+                    $("li").each(function(i, e) {
+                        $(e).removeClass().addClass(cArr[i]);
+                    })
+                    index = myindex;
+                    show();
+                }
+            })
+        })
+
+        //改变底下按钮的背景色
+        function show() {
+            $($s).eq(index).addClass("blue").parent().siblings().children().removeClass("blue");
+        }
+
+        //点击class为p2的元素触发上一张照片的函数
+        $(document).on("click", ".p2", function() {
+            previmg();
+            return false; //返回一个false值，让a标签不跳转
+        });
+
+        //点击class为p4的元素触发下一张照片的函数
+        $(document).on("click", ".p4", function() {
+            nextimg();
+            return false;
+        });
+
+        //			鼠标移入box时清除定时器
+        $(".box").mouseover(function() {
+            clearInterval(timer);
+        })
+
+        //			鼠标移出box时开始定时器
+        $(".box").mouseleave(function() {
+            timer = setInterval(nextimg, 4000);
+        })
+
+        //			进入页面自动开始定时器
+        timer = setInterval(nextimg, 4000);
+    </script>
+
 </body>
+
 </html>
+<!-- 
+    总结： 
+    1. 设置 CSS 样式，主要是图片的样式 
+        a.  图片集 在盒（relative）子中 display 应是 absolute
+        b.  left: 50%; margin-left: - width/2; 将自身元素水平居中
+        c.  top: 50%;margin-top: -height/2; 垂直居中
+        d.  图片集不动，且只是对应的样式表在移动
+            图片集 一一对应样式数组中的样式(下标一一对应)
+            样式数组： ["p7", "p6", "p5", "p4", "p3", "p2", "p1"]
+            且本例中，p3 是图片集中 显示在中间的图片
+            p2 是其左边
+            p4 p5 p6 p7 是其右边
+            因为图片数组（虽然没有创建图片数组）下标各对应样式表中的下标
+            所以只要 样式数组在移动，则图片所显示的位置则会移动，
+            （且因为设置了 transition 属性 过渡属性）
+        e. 左右键按钮(即 上一张、下一张 )
+            下列的 pho 数字，即是根据 在 li 集合中的位置进行标的号
+            photo： 0  1  2  3  4  5  6  图片集实则没有标号，我自加的，便于理解
+            css：p7 p6 p5 p4 p3 p2 p1  样式数组
+            只要 样式数组移动(),其对应的图片集就有不同的显示位置
+            下一张： 即让 pho.3 显示在中间，且其他图片也应该有相应的位置
+                    且位置是连续的
+                    即让 p7移至数组尾部 ，则对应 p3 的则是 3
+                    即是让 样式数组首位移至末尾位，让整个序列向右移动
+            上一张： 即是让 样式数组末尾位移至首位，让整个序列向左移动
+        f.  图片下边的 按钮集
+                其实和 左右键按钮 类似
+                首先 1. 全局变量  index ， 表示现在显示在中间图片的 下标
+                        （下标：以一开始显示的图片 index 为 0
+                            点击下一张 ，即 index 为 1
+                            且 每次 index ++(下一张) 或--(上一张)
+                            都会判断是否 大于6 或 小于 0
+                             大于6 则赋值为 0，小于 0 则赋值为 6 
+                           ）
+                    2. myindex 记录点击按钮的下标
+                        b = myindex- index
+                        A. b = 0, 则表示两者下标一致，即按钮下标，和正显示图片的下标
+                        B. b > 0, 意味着用户想要显示其后面的图片
+                            b(数值) == 点击了 几次下一张
+                            而在此，不以 头 添至 尾，
+                            而是将截取数组前 b 位， slice(0,b),
+                            ************************************************************
+                            拼接至 数组末尾 ( 该方法有待学习)$.merge(cArr, newarr); 
+                            ************************************************************
+                        C.  b < 0, 显示前面的图片(相对一开始显示的图片而言)
+                                    即要将 数组的 末尾几位 添加至首位
+                            现在此，将数组反转   cArr.reverse();
+                            后进行如 上的操作， 将头部 添加至 尾部，后再 反转回来
+                        D.  最后将 myindex 赋值给 index
+                    3. show();
+                        该函数显示 按钮的颜色，且根据 index 
+                        show() 在每次操作后都需执行一次(即用户点击 上下张  或 按钮)
+                        且在函数中也包含
+                            A. 点击左边一张图片，则让其中间显示，右边的图片也如此
+                                在此不需重新编写新的函数， 点击 左边一张图片，  即点击了 上一张
+                                                         点击 右边一张图片， 类同
+                            B. 定时器的使用，
+                                一开始时 启动定时器
+                                鼠标移入则关闭定时器
+                                移出则启动
+ -->
